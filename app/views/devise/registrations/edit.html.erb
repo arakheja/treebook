@@ -1,0 +1,34 @@
+<h2>Edit My Profile</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'form-horizontal' }) do |f| %>
+
+  <fieldset>
+    <legend>About Me</legend>
+    <%= f.input :first_name, input_html: { class: 'input-xxlarge' } %>
+    <%= f.input :last_name, input_html: { class: 'input-xxlarge' } %>
+    <%= f.input :email, input_html: { class: 'input-xxlarge' } %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Profile Picture</legend>
+    <%= f.input :avatar, as: :file %>
+    <%= bootstrap_paperclip_picture f, :avatar %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Update Password</legend>
+    <%= f.input :password, hint: "Leave blank if you do not want to change it", input_html: { class: 'input-xxlarge', autocomplete: 'off', value: "" } %>
+    <%= f.input :password_confirmation, input_html: { class: 'input-xxlarge', autocomplete: 'off' } %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Confirm Changes</legend>
+    <%= f.input :current_password, hint: "We need your current password to confirm your changes", input_html: { class: 'input-xxlarge', autocomplete: 'off' } %>
+  </fieldset>
+
+  <div class="form-actions">
+    <%= f.submit "Update", class: 'btn btn-primary' %>
+    <%= link_to "Back", root_path, class: 'btn' %>
+    <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-danger pull-right' %>
+  </div>
+<% end %>

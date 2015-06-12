@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PatTalk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body onload="startTime();">
+	<div id="player">
+		<audio controls loop class="music_player">
+			<source src="<%= asset_path("RockstageSoundtrackFinal.mp3") %>" type="audio/mpeg">
+		</audio>
+	</div>
+
+	<div id="header">
+		<%= render template: 'activities/_navbar' %>
+	</div>
+
+	<section id="sidebar">
+		<%= render template: 'activities/_sidebar' %>
+	</section>
+
+	<div class="flash-ajax">
+		<% flash.each do |type, message| %>
+			<div class="alert <%= flash_class type %>">
+				<button class="close" data-dismiss="alert">x</button>
+				<%= message %>
+			</div>
+		<% end %>
+	</div>
+
+	<div id="container">
+
+		
+			<%= yield %>
+		
+	</div>
+
+
+
+
+
+
+
+	<%= render template: 'layouts/_browse.html.erb' %>
+
+
+	<video id="main-flow" class="full-screen-video" poster="<%= asset_path("RockstageFlowback.png") %>" autobuffer autoplay loop>
+		<source src="<%= asset_path("RockstageBackground.mov") %>" />
+	</video>
+
+
+	<div id="popup-playlist" class="dark-bg" style="height: 350px; display: none; ">
+		<h2>now playing...</h2>
+		<ul>
+			<li>
+				<h3>Song one</h3>
+				<p class="gray">Artist one</p>
+			</li>
+			<li>
+				<h3>Song two</h3>
+				<p class="gray">Artist two</p>
+			</li>
+			<li>
+				<h3>Song three</h3>
+				<p class="gray">Artist three</p>
+			</li>
+		</ul>
+	</div>
+
+
+
+</body>
+
+<script id="activities-template" type="text/x-handlebars-template">
+	<a class="dropdown-toggle" href="#">Notifications ({{count}})</a>
+	<ul class="dropdown-menu">
+	{{#each activities}}
+		{{activityLink}}
+	{{/each}}
+	<li class="divider"></li>
+	<li><a href="{{activityFeedLink}}">All Activities</a></li>
+	</ul>	
+</script>
+
+</html>
+
+
+
+
+

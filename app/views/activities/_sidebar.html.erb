@@ -1,0 +1,30 @@
+<div class="navbar-inner">
+					<% if user_signed_in? %>
+					<header id="sidebar-header">
+				        <% if current_user.avatar? %>
+				            <%= link_to(image_tag(current_user.avatar(:thumb)), profile_path(current_user)) %>
+				        <% else %>
+					        <%= link_to(image_tag(current_user.default_avatar_menu), profile_path(current_user)) %>
+				        <% end %>
+						<p><%= current_user.full_name %></p>
+					</header>
+					<% end %>
+					<nav>
+						<ul id="sidebar-links" class="nav">
+							<% if user_signed_in? %>
+								<li><%= link_to "Home", profile_path(current_user) %></li>
+								<li><a href="#browsePage" role="button" class="" data-toggle="modal">Browse</a></li>
+								<li><%= link_to "Charts", profile_path(current_user) %></li>
+								<li><%= link_to "Discover", profile_path(current_user) %></li>
+							<% else %>
+								<li><%= link_to "Home", login_path %></li>
+								<li><%= link_to "Browse", login_path %></li>
+								<li><%= link_to "Charts", login_path %></li>
+								<li><%= link_to "Discover", login_path %></li>
+							<% end %>
+						</ul>
+					</nav>
+					<footer>
+						<p>Terms of use</p>
+					</footer>
+				</div>

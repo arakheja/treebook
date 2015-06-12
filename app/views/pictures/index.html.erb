@@ -1,0 +1,81 @@
+<%= render_breadcrumbs %>
+
+
+<h1>
+  <%= @album.title %>
+  <% if signed_in? && current_user == @user %>
+    <%= link_to 'Add Picture', new_album_picture_path(current_user, @album), class: 'btn btn-primary' %>
+  <% end %>
+  <%= link_to "Slideshow", slideshow_path(@user, @album), class: 'btn' %>
+</h1>
+<br />
+
+<div id="links">
+  <ul class="thumbnails">
+    <% @pictures.each do |picture| %>
+      <li class="span4">
+        <div class="thumbnail">
+          <a href="<%= picture.asset.url %>" title="<% if picture.caption %><%= picture.caption %><% end %>">
+              <img src="<%= picture.asset.url(:medium) %>" alt="<% if picture.caption %><%= picture.caption %><% end %>" style="max-height: 170px; width: auto;">
+          </a>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <% @pictures.each do |picture| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+  <% end %>
+</div>
+
+
+
+<script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+</script>
+
+<% if false %>
+<% if signed_in? && current_user == @user %>
+    <%= link_to 'Add Picture', new_album_picture_path(current_user, @album), class: 'btn pull-right' %>
+<% end %>
+<h1><%= @album.title %> <%= link_to "Slideshow", slideshow_path(@user, @album), class: 'btn' %></h1>
+
+
+<ul class="thumbnails">
+<% @pictures.each do |picture| %>
+  <li>
+    <div class="thumbnail">
+
+    <a href='<%= picture.asset.url(:large) %>' rel="lightbox" title="<%= picture.caption %>">
+      <%= image_tag(picture.asset.url(:small)) %>
+    </a>
+      <div class="caption">
+        <% if picture.caption? %><%= picture.caption %><br /><% end %>
+        
+        <%= link_to 'View full size', album_picture_path(@user, @album, picture) %>
+
+        <% if can_edit_picture?(picture) %>
+          | <%= link_to "Edit", edit_album_picture_path(@album, picture) %>
+          | <%= link_to "Delete", album_picture_path(@album, picture), method: :delete, data: { confirm: "Are you sure?"} %>
+        <% end %>
+      </div>
+    </div>
+  </li>  
+<% end %>
+</ul>
+<% end %>

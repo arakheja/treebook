@@ -1,0 +1,44 @@
+<div class="horizontalContent">
+	<div id="parallax">
+		<% if @user.gravatar_url %>
+			<div id="background">
+			</div>
+		<% else %>
+			<div id="background"></div>
+		<% end %>
+		<div class="page-header">
+			<h1><%= @user.full_name %></h1>
+				<%= link_to "Albums", albums_path(@user), class: 'btn' %>
+
+				<% if signed_in? %>
+				<span id="friend-status">
+					<% if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user) %>
+					<%= link_to "Edit Friendship", edit_user_friendship_path(friend_id: @user), class: 'btn' %>
+					<% else %>
+						<% if current_user != @user %>
+							<%= link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn', id: 'add-friendship', data: { friend_id: @user.to_param } %>
+						<% end %>
+					<% end %>
+				</span>
+			<% end %>
+		</div>
+		<div id="foreground">
+			
+			<!-- ul id="activities" class="columns" also known as the user stream -->
+			<% if @activities %>
+				<%= render :template => 'activities/index' %>
+			<% end %>
+			<!-- do not place content below as the stream is paginated -->
+		</div>
+	</div>
+</div>
+
+<!-- dub due to ajax -->
+<script>
+$(function() {
+   $("#parallax").mousewheel(function(event, delta) {
+      this.scrollLeft -= (delta * 30);
+      event.preventDefault();
+   });
+});
+</script>

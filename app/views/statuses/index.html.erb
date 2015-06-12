@@ -1,0 +1,36 @@
+<script>
+  $.getScript("<%= asset_path('statuses.js.coffee') %>");
+</script>
+
+<% if user_signed_in? %>
+
+<%= render :partial => "form", :locals => { :statuses => @status } %>
+
+
+<% @statuses.each do |status| %>
+  <% if can_display_status?(status) %>
+    <div class="status media">
+      <%= avatar_profile_link status.user, { class: "pull-left" }, class: "media-object" %>
+      <div class="media-body">
+        <h4 class="media-heading"><%= status.user.full_name %></h4>
+        <p><%= status.content %></p>
+        <%= status_document_link(status) %>
+        <div class="meta">
+            <%= link_to time_ago_in_words(status.created_at) + " ago", status %> 
+            <% if signed_in? && current_user == status.user %>
+            <span class="admin">
+              | <%= link_to "Edit", edit_status_path(status) %> | 
+              <%= link_to "Delete", status, method: :delete, data: { confirm: "Are you sure your want to delete this message?"} %>
+            </span>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<% else %>
+<div onload="script(twitter-wjs);">
+<a class="twitter-timeline" href="https://twitter.com/RockStageOrg" data-widget-id="358720631455498243">Tweets by @RockStageOrg</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<% end %>

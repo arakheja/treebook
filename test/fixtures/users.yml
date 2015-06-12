@@ -1,0 +1,25 @@
+george:
+  first_name: 'George'
+  last_name: 'Petrov'
+  email: 'jokopetrov@gmail.com'
+  profile_name: 'georgepetrov'
+  encrypted_password: $2a$10$Fh/Hm8RxDsuPTeBUr6864.GARlcmt7zF2WspaXGr3BIv2C27N.osq
+# encripted array for the word testing
+
+emilly:
+  first_name: 'Emilly'
+  last_name: 'Angelheart'
+  email: 'openwings@abv.bg'
+  profile_name: 'EmAngel'
+
+ivelina:
+  first_name: 'Ivelina'
+  last_name: 'Atanasova'
+  email: 'ivelina@gmail.com'
+  profile_name: 'Calixa'
+
+blocked_friend:
+  first_name: 'Blocked'
+  last_name: 'Friend'
+  email: blocked@abv.bg
+  profile_name: 'YouBlockedMe'

@@ -1,0 +1,15 @@
+ @font-face {
+  font-family: 'GOTHIC';
+  src: url('GOTHIC.eot?#iefix') format('embedded-opentype'),
+       url('GOTHIC.ttf')  format('truetype'),
+       url('GOTHIC.svg#svgFontName') format('svg');
+}
+/*
+ @font-face {
+  font-family: 'GOTHIC';
+  src: url('GOTHIC.eot?#iefix') format('embedded-opentype'),
+	   url('GOTHIC.woff') format('woff'),
+       url('GOTHIC.ttf')  format('truetype'),
+       url('GOTHIC.svg#svgFontName') format('svg');
+}
+*/

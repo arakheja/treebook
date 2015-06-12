@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @status.user.full_name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @status.content %>
+</p>
+
+<hr />
+
+<% if @status.document && @status.document.attachment? %>
+	<%= status_document_link @status %>
+	<hr />
+<% end %>
+
+<%= link_to 'Edit', edit_status_path(@status) %> |
+<%= link_to 'Back', statuses_path %> |
+<%= link_to "Delete", status_path, method: :delete, data: { confirm: "Are you sure?"} %>

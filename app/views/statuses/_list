@@ -1,0 +1,3 @@
+<%= status.user.full_name %>
+<%= status.content %>
+<hr />

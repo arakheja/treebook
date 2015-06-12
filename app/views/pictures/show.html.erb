@@ -1,0 +1,14 @@
+<%= render_breadcrumbs %>
+<h2><%= @picture.caption %></h2>
+
+<%= image_tag(@picture.asset.url(:large), alt: @picture.caption, class: 'img-polaroid') %>
+
+<br />
+
+<div>
+	<br /><p><em><%= @picture.description %></em></p><hr />
+</div>
+
+<%= link_to 'Back to Album', album_pictures_path(@album) %> |
+<%= link_to 'Edit', edit_album_picture_path(@album, @picture) %> |
+<%= link_to "Delete", album_picture_path(@album, @picture), method: :delete, data: { confirm: "Are you sure?"} %>

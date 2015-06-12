@@ -1,0 +1,8 @@
+<%= render_breadcrumbs %>
+<h1>Editing picture</h1>
+
+<p>Hint: <em>Leave it as "no file chosen" if you do not want to change the picture</em></p>
+<%= render 'form' %>
+
+<%= link_to 'Show', album_picture_path(@album, @picture) %> |
+<%= link_to 'Back', album_pictures_path(@album) %>

@@ -1,0 +1,27 @@
+
+<h1>Listing breaking_news</h1>
+
+<% @breaking_news.each do |breaking_news| %>
+  <h3><%= breaking_news.title %></h3>
+  <p><%= breaking_news.content %></p>
+  <p>Author: <%= breaking_news.name %></p>
+
+
+  <%= link_to 'Show', breaking_news %>
+  <%= link_to 'Edit', edit_breaking_news_path(breaking_news) %>
+  <%= link_to 'Destroy', breaking_news, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+  <div class="meta">
+    <%= link_to time_ago_in_words(breaking_news.created_at) + " ago", breaking_news %>
+    <span class="admin">
+      | <%= link_to "Show", breaking_news %>
+      | <%= link_to "Edit", edit_breaking_news_path(breaking_news) %>
+      | <%= link_to "Destroy", breaking_news, method: :delete, data: { confirm: "Are you sure?" } %>
+    </span>
+  </div>
+
+<% end %>
+
+<br />
+
+<%= link_to 'Announce Breaking News', new_breaking_news_path %>

@@ -1,0 +1,41 @@
+
+<div class="row">
+    <h2>Welcome to a world united by music</h2>
+
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class: "well"}) do |f| %>
+      <%= devise_error_messages! %>
+
+      <fieldset>
+        <div class="span3">
+          <p>Sign-in with Facebook</p>
+          <p>Sign-in with Twitter</p>
+          <p>Crate a business page</p>
+          <p>PR Agent?<p>
+          <em>Find resources here<em>
+        </div>
+        <div class="span3">
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :profile_name %>
+        </div>
+        <div class="span3">
+        <%= f.input :email %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        </div>
+        <div class="span3">
+          <p>Discover.</p>
+          <p>Share.</p>
+          <p>Support.</p>
+          <p>Experience<br />a new world.</p>
+        </div>
+
+        <div class="span3 offset9"><%= f.button :submit, "Sign up", class: 'btn btn-success btn-large' %></div>
+      </fieldset>
+
+    <% end %>
+      <div class="span12">
+        <br />
+        <%= render "devise/shared/links" %>
+      </div>
+</div>

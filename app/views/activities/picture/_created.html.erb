@@ -1,0 +1,41 @@
+
+<p class="smaller">Uploaded a new Picture.</p>
+<div id="links">
+	<a id="gallery" href="<%= activity.targetable.asset.url %>" title="Title"><img src="<%= activity.targetable.asset.url(:medium) %>" alt="alt"></a>
+</div>
+<br />
+<p class="muted smaller">
+	to their <%= link_to activity.targetable.album.title, album_path(activity.user.profile_name, activity.targetable.album_id) %> album!
+</p>
+
+
+
+
+
+
+
+
+<% if false %>
+<%= link_to image_tag(activity.targetable.asset.url), album_picture_path(activity.user.profile_name, activity.targetable.album_id, activity.targetable_id) %>
+
+<a href="#myModal" role="button" data-toggle="modal"><%= image_tag(activity.targetable.asset.url(:medium)) %></a>
+
+<div id="myModal" class="modal container hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel"><%= activity.targetable.caption %></h3>
+	</div>
+	<div class="modal-huge-body">
+		<%= link_to image_tag(activity.targetable.asset.url), album_picture_path(activity.user.profile_name, activity.targetable.album_id, activity.targetable_id) %>
+	</div>
+	<div class="modal-footer">
+		<a href="<%= album_path(activity.user.profile_name, activity.targetable.album_id) %>" class="btn btn-primary">Go to album</a>
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<span class="pull-left"><%= activity.targetable.description %></span>
+	</div>
+
+</div>
+<% end %>
+
+
+

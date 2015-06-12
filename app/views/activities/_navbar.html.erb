@@ -1,0 +1,68 @@
+<% if false %>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="clock" class="navbar-brand" href="<%= root_path %>"></a>
+          <div class="nav-collapse collapse navbar-inverse-collapse">
+          	<ul class="nav navbar-nav">
+          		<li><%= link_to "All Messages", feed_path %></li>
+          		<% if user_signed_in? %>
+          		<li><%= link_to "Activity Feed", activities_path %></li>
+          		<% end %>
+          	</ul>
+          	<div class="nav-collapse collapse navbar-responsive-collapse">
+          	<form class="narbar-form pull-left" action>
+          		<input type="text" class="form-control col-lg-8" placeholder="Search">
+          	</form>
+	          	<ul class="nav navbar-nav pull-right">
+					<% if user_signed_in? %>
+						<li>
+							<%= link_to "Friends", user_friendships_path, class: 'navbar-link' %>
+						</li>
+						<li><%= link_to "Albums", albums_path(current_user) %></li>
+						<li><%= link_to current_user.full_name, edit_user_registration_path %></li>
+						<li><%= link_to "Log Out", logout_path %></li>
+					<% else %>
+						<li><%= link_to "Register", register_path %></li>
+						<li><%= link_to "Log in", login_path %></li>
+					<% end %>
+	          	</ul>	
+	        </div>
+          </div>
+	</div>
+</div>
+<% end %>
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner header_menu">
+		<div class="container-fluid">
+			<a id="clock" class="brand" href="<%= root_path %>"></a>
+			<ul class="nav">
+				<li class="divider-vertical"><%= link_to "All Messages", feed_path %></li>
+				<% if user_signed_in? %>
+					<li id="activity-feed"><%= link_to "Notifications", "#" %></li>
+					<li><%= link_to "Activity Feed", activities_path %></li>
+					<li><%= link_to "Share", new_status_path, class: 'blue-link' %></li>
+				<% end %>
+			</ul>
+			<ul class="nav pull-right">
+				<% if user_signed_in? %>
+					<li>
+						<%= link_to "Friends", user_friendships_path %>
+					</li>
+					<li><%= link_to "Albums", albums_path(current_user) %></li>
+					<li><%= link_to current_user.full_name, edit_user_registration_path %></li>
+					<li><%= link_to "Log Out", logout_path %></li>
+				<% else %>
+					<li><%= link_to "Register", register_path %></li>
+					<li><%= link_to "Log in", login_path %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

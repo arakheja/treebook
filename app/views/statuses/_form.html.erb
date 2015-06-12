@@ -1,0 +1,37 @@
+<div class="content-fluid" style="width: 725px; margin: auto;">
+<fieldset>
+  <legend></legend>
+  <div class="row-fluid">
+      <%= simple_form_for(@status, html: { class: "form-inline", multipart: true }) do |f| %>
+
+
+        <div class="span2"><%= avatar_profile_link current_user, {} %></div>
+        <div class="span9">
+          <%= f.input :content, input_html: { rows: 1, class: 'input-xxlarge large-text' }, label: '', placeholder: 'What&#39;s on your mind, '.html_safe + current_user.first_name + '?' %>
+        </div>
+
+        <div id="attachments" class="span8">
+        <%= f.fields_for :document do |document_fields| %>
+          <% if document_fields.object.attachment? %>
+            <div class="control-group">
+              <label class="control-label">Current attachment</label>
+              <div class="controls">
+                <%= link_to document_fields.object.attachment_file_name, document_fields.object.attachment.url %>
+              </div>
+            </div>
+            <%= document_fields.input :remove_attachment, as: :boolean, label: "Remove attachment?" %>
+          <% end %>
+          <%= document_fields.input :attachment, as: :file %>
+        <% end %>
+        </div>
+
+        <div class="span3">
+          <%= link_to 'back', profile_path(current_user), class: 'gray' %>
+          <%= f.button :submit, class: 'btn btn-primary pull-right' %>
+        </div>
+        
+      <% end %>
+
+  </div>
+</fieldset>
+</div>

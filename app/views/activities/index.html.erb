@@ -1,0 +1,60 @@
+<ul class="columns" id="activities" data-role="listview" data-filter="true">
+	<h2>
+		<% if (@user && @user == current_user) %>
+		Recent activity<br />
+		<%= link_to "Post a New Message", new_status_path, class: "btn btn-primary" %>
+		<% else %>
+		Recent activity
+		<% end %>
+	</h2>
+		
+
+<% @activities.reverse.each do |activity| %>
+	
+		<% if activity.targetable %>
+			<li>
+				<div id="feed" class="media">
+					<%= avatar_profile_link activity.user, {}, class: 'pull-left' %>
+					<div id="feed-body" class="media-body">
+						<h4 class="feed-heading media-heading">
+							<%= activity.user.full_name %>
+						</h4>
+							<blockquote>
+							<%= render partial: "activities/#{activity.targetable_type.underscore}/#{activity.action}", locals: { activity: activity } %>
+							<small id="feed-small"><%= time_ago_in_words(activity.created_at) + ' ago' %></small>
+							</blockquote>
+					</div>
+				</div>
+				
+			</li>
+		<% end %>
+	
+<% end %>
+</ul>
+<% if @activity %>
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+	<% @activities.each do |activity| %>
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <% end %>
+</div>
+<% end %>
+
+<% if @activity %>
+<script>
+  document.getElementById('links').onclick = function (event) {
+      event = event || window.event;
+      var target = event.target || event.srcElement,
+          link = target.src ? target.parentNode : target,
+          options = {index: link, event: event},
+          links = this.querySelectorAll("a#gallery")
+//          links = this.getElementsByTagName('a');
+      blueimp.Gallery(links, options);
+  };
+</script>
+<% end %>
